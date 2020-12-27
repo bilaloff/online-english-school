@@ -16,4 +16,17 @@
         <servlet-name>FrontController</servlet-name>
         <url-pattern>/pages/*</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>SessionLocaleFilter</filter-name>
+        <filter-class>com.english.filter.SessionLocaleFilter</filter-class>
+        <init-param>
+            <param-name>DEFAULT_LOCALE</param-name>
+            <param-value>en-US</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionLocaleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

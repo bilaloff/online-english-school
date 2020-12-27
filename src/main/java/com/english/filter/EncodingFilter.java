@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 public class EncodingFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        res.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        res.setCharacterEncoding(StandardCharsets.UTF_8.name());
         chain.doFilter(req, res);
     }
 }

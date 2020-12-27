@@ -49,8 +49,8 @@ public class SessionLocaleFilter extends HttpFilter {
     private Locale getSupportedLocale(Enumeration<Locale> userLocales) {
         while (userLocales.hasMoreElements()) {
             Locale currLocale = userLocales.nextElement();
-            if (isLocaleSupported(currLocale.toString())) {
-                return supportedLocales.get(currLocale.toString());
+            if (isLocaleSupported(currLocale.toLanguageTag())) {
+                return supportedLocales.get(currLocale.toLanguageTag());
             }
         }
         return defaultLocale;

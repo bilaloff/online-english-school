@@ -3,6 +3,7 @@ package com.english.filter;
 import javax.servlet.*;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
@@ -33,22 +34,22 @@ public class SessionLocaleFilter extends HttpFilter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpSession session = request.getSession();
+    public void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpSession session = req.getSession();
 
-        if (isLocaleSupported(request.getParameter(LOCALE))) {
-            session.setAttribute(LOCALE, supportedLocales.get(request.getParameter(LOCALE)));
+        if (isLocaleSupported(req.getParameter(LOCALE))) {
+            session.setAttribute(LOCALE, supportedLocales.get(req.getParameter(LOCALE)));
         } else if (session.getAttribute(LOCALE) == null) {
-            session.setAttribute(LOCALE, getSupportedLocale(request.getLocales()));
+            session.setAttribute(LOCALE, getClientSupportedLocale(req));
         }
 
         chain.doFilter(req, res);
     }
 
-    private Locale getSupportedLocale(Enumeration<Locale> userLocales) {
-        while (userLocales.hasMoreElements()) {
-            Locale currLocale = userLocales.nextElement();
+    private Locale getClientSupportedLocale(HttpServletRequest req) {
+        Enumeration<Locale> clientLocales = req.getLocales();
+        while (clientLocales.hasMoreElements()) {
+            Locale currLocale = clientLocales.nextElement();
             if (isLocaleSupported(currLocale.toLanguageTag())) {
                 return supportedLocales.get(currLocale.toLanguageTag());
             }

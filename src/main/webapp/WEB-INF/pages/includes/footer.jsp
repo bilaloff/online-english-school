@@ -39,7 +39,7 @@
             <div class="footer-column">
                 <label for="select-region"></label>
                 <select class="footer-select" name="" id="select-region">
-                    <option value="" selected><fmt:message key="country"/></option>
+                    <option value="" hidden selected><fmt:message key="country"/></option>
                     <option value="en-AU">Australia</option>
                     <option value="pt-BR">Brazil</option>
                     <option value="ga-IE">Ireland</option>

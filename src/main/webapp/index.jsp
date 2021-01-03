@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="${context}/assets/css/shared.css"/>
     <link rel="stylesheet" href="${context}/assets/css/header.css"/>
     <link rel="stylesheet" href="${context}/assets/css/footer.css"/>
-    <link rel="stylesheet" href="${context}/assets/css/banner.css"/>
+    <link rel="stylesheet" href="${context}/assets/css/home.css"/>
     <link rel="stylesheet" href="${context}/assets/fonts/fontawesome/css/all.css">
     <link rel="icon" type="image/png" sizes="16x16" href="${context}/assets/img/favicon.ico">
     <script defer src="${context}/assets/js/utils.js"></script>

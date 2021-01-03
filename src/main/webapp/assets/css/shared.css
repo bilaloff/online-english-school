@@ -1,0 +1,138 @@
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+
+:root {
+    --color-white: #F5F5F7;
+    --color-primary: #9482FF;
+    --color-primary-darker: #7768CC;
+    --color-primary-lighter: #D6CFFF;
+    --background-dark: #1E1A33;
+    --background-dark-ltr: #282343;
+    --color-copy: #1E1A33;
+    --color-copy-light: #F5F5F7;
+    --header-height: 80px;
+    --font-size: 16px;
+    --line-height: 1.6rem;
+    --border-radius: 0.2em;
+    --border-radius--small: 0.1em;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Elements */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    color: var(--color-copy);
+}
+
+h1 {
+    line-height: 50px;
+    font-size: 42px;
+}
+
+h2 {
+    line-height: 36px;
+    font-size: 30px;
+}
+
+h3 {
+    line-height: 32px;
+    font-size: 24px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+hr {
+    border-top: none;
+    border-bottom: 1px solid var(--color-white);
+}
+
+/* Classes */
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.push-right {
+    margin-left: auto;
+}
+
+.btn {
+    padding: .625rem 1.325rem;
+    font-weight: 600;
+}
+
+/* Components */
+
+/* Media Queries */
+
+/* min-width */
+
+@media (min-width: 576px) {}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+    h1 {
+        line-height: 64px;
+        font-size: 54px;
+    }
+    h2 {
+        line-height: 44px;
+        font-size: 36px;
+    }
+    .hidden-lg {
+        display: none!important;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/* max-width */
+
+@media (max-width: 575px) {}
+
+@media (max-width: 767px) {
+    .hidden-sm {
+        display: none!important;
+    }
+}

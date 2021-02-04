@@ -56,8 +56,9 @@ public class UserDaoImpl implements UserDao {
             if (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getShort("id"));
-                user.setEmail(resultSet.getNString("email"));
-                user.setName(resultSet.getNString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setFirstname(resultSet.getString("firstname"));
+                user.setLastname(resultSet.getString("lastname"));
                 return Optional.of(user);
             }
         } catch (SQLException e) {

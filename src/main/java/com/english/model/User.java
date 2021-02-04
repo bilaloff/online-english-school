@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 public class User extends Model {
 
     private Role role;
-    private String name;
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
     private String image;
@@ -25,12 +26,20 @@ public class User extends Model {
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -91,6 +100,6 @@ public class User extends Model {
 
     @Override
     public String toString() {
-        return String.format("%s [id: %d, email: %s, name: %s, isLogged:%b]", getClass().getSimpleName(), getId(), getEmail(), getName(), isLogged());
+        return String.format("%s [id: %d, email: %s, firstname: %s, isLogged:%b]", getClass().getSimpleName(), getId(), getEmail(), getFirstname(), isLogged());
     }
 }

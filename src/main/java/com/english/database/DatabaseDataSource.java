@@ -24,8 +24,8 @@ public class DatabaseDataSource {
     private DatabaseDataSource() {
         //ToDO Refactor DatabaseDataSource
         ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
-        String driver = resourceBundle.getString(DB_DRIVER);
-        String url = resourceBundle.getString(DB_URL);
+        String driver = System.getenv(resourceBundle.getString(DB_DRIVER));
+        String url = System.getenv(resourceBundle.getString(DB_URL));
         String username = System.getenv(resourceBundle.getString(DB_USERNAME));
         String password = System.getenv(resourceBundle.getString(DB_PASSWORD));
         int poolSize = Integer.parseInt(resourceBundle.getString(DB_POOL_SIZE));

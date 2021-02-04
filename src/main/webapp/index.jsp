@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${context}/assets/css/footer.css"/>
     <link rel="stylesheet" href="${context}/assets/css/home.css"/>
     <link rel="stylesheet" href="${context}/assets/fonts/fontawesome/css/all.css">
-    <link rel="icon" type="image/png" sizes="16x16" href="${context}/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="${context}/favicon.ico">
     <script defer type="module" src="${context}/assets/js/main.js"></script>
 </head>
 <body>

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
 
-    private static final String FIND_USER_BY_EMAIL = "SELECT * FROM user WHERE email = ?";
+    private static final String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
 

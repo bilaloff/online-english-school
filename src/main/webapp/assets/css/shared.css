@@ -72,6 +72,10 @@ hr {
     border-bottom: 1px solid var(--color-white);
 }
 
+input:focus {
+    outline: none;
+}
+
 /* Classes */
 
 .container {

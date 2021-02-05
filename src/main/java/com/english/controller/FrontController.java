@@ -1,9 +1,9 @@
 package com.english.controller;
 
-import com.english.factory.Action;
-import com.english.factory.ActionFactory;
-import com.english.factory.ActionResult;
-import com.english.factory.Direction;
+import com.english.actionfactory.Action;
+import com.english.actionfactory.ActionFactory;
+import com.english.actionfactory.ActionResult;
+import com.english.actionfactory.Direction;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

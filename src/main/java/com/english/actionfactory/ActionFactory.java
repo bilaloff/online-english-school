@@ -1,6 +1,6 @@
-package com.english.factory;
+package com.english.actionfactory;
 
-import com.english.factory.action.*;
+import com.english.actionfactory.action.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

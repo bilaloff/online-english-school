@@ -17,6 +17,11 @@
     --line-height: 1.6rem;
     --border-radius: 0.2em;
     --border-radius--small: 0.1em;
+
+    /* Colors for errors */
+    --color-success: #41ff68;;
+    --color-error: #ff4141;
+    --color-warning: #ff9341;
 }
 
 *, *:before, *:after {
@@ -92,6 +97,10 @@ input:focus {
 .btn {
     padding: .625rem 1.325rem;
     font-weight: 600;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Components */

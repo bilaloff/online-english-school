@@ -16,6 +16,7 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
     private static final String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    private static final String FIND_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
 
@@ -24,6 +25,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findById(Long id) throws DAOException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getShort("id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setFirstname(resultSet.getString("firstname"));
+                user.setLastname(resultSet.getString("lastname"));
+                user.setImage(resultSet.getString("image"));
+                return Optional.of(user);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
         return Optional.empty();
     }
 
@@ -59,6 +76,7 @@ public class UserDaoImpl implements UserDao {
                 user.setEmail(resultSet.getString("email"));
                 user.setFirstname(resultSet.getString("firstname"));
                 user.setLastname(resultSet.getString("lastname"));
+                user.setImage(resultSet.getString("image"));
                 return Optional.of(user);
             }
         } catch (SQLException e) {

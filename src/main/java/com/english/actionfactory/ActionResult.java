@@ -5,12 +5,14 @@ public class ActionResult {
     private Direction direction;
     private String page;
 
+    public static final ActionResult SKIP = new ActionResult(Direction.SKIP);
+
     public ActionResult(Direction direction, String page) {
         this.direction = direction;
         this.page = page;
     }
 
-    public ActionResult(Direction direction){
+    private ActionResult(Direction direction){
         this.direction = direction;
     }
 

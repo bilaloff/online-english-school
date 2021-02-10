@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class JsonFilter extends HttpFilter {
@@ -18,7 +19,8 @@ public class JsonFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if (request.getContentType().equals(APPLICATION_JSON)) {
+        String contentType = request.getContentType();
+        if (Objects.nonNull(contentType) && contentType.equals(APPLICATION_JSON)) {
             try {
                 request.setAttribute(BODY, JsonParser.parseDoc(getRequestBody(request)).toString());
                 response.setContentType(APPLICATION_JSON);

@@ -39,4 +39,13 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>JsonFilter</filter-name>
+        <filter-class>com.english.filter.JsonFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>JsonFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
 </web-app>

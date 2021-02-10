@@ -11,7 +11,7 @@ public interface BaseDao<T extends Model> {
 
     List<T> findAll();
 
-    void add(T entity);
+    void add(T entity) throws DAOException;
 
     void update(T entity);
 

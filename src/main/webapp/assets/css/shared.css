@@ -4,6 +4,13 @@
 /* Reset */
 
 :root {
+    --header-height: 80px;
+    --font-size: 16px;
+    --line-height: 1.6rem;
+    --border-radius: 0.2em;
+    --border-radius--small: 0.1em;
+
+    /* Colors */
     --color-white: #F5F5F7;
     --color-primary: #9482FF;
     --color-primary-darker: #7768CC;
@@ -12,11 +19,6 @@
     --background-dark-ltr: #282343;
     --color-copy: #1E1A33;
     --color-copy-light: #F5F5F7;
-    --header-height: 80px;
-    --font-size: 16px;
-    --line-height: 1.6rem;
-    --border-radius: 0.2em;
-    --border-radius--small: 0.1em;
 
     /* Colors for errors */
     --color-success: #41ff68;;
@@ -32,8 +34,12 @@
 
 /* Elements */
 
+html {
+    font-size: 100%;
+}
+
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
     font-size: var(--font-size);
     line-height: var(--line-height);
     color: var(--color-copy);
@@ -55,8 +61,7 @@ h3 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', 'Segoe UI', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 ul {

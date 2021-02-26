@@ -419,7 +419,7 @@ a:active {
 }
 
 .dropdown__content.show {
-    max-height: 100vh;
+    max-height: unset;
     opacity: 1;
 }
 

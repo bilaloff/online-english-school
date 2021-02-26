@@ -122,6 +122,16 @@ a:active {
     padding-left: 0;
 }
 
+.list__item {
+    /*display: inline-block;*/
+}
+
+.list__item a {
+    display: inline-block;
+    color: inherit;
+    transition: color 125ms ease-in-out;
+}
+
 .list--inline {
     display: inline-flex;
     align-items: center;
@@ -314,10 +324,13 @@ a:active {
     justify-content: space-between;
 }
 
-.nav .list--inline a {
+.nav .list--inline {
     color: #fff;
     font-size: 14px;
-    padding: 1.6rem 0;
+}
+
+.nav .list--inline a {
+    padding: 2rem;
 }
 
 .nav .list--inline .list__item:not(:last-child) {
@@ -326,7 +339,6 @@ a:active {
 
 .nav .list--inline .list__item {
     position: relative;
-    padding: 2rem;
     transition: background-color 150ms ease-in-out;
 }
 
@@ -358,7 +370,7 @@ a:active {
     padding: 1.425rem 2.75rem;
 }
 
-.nav__buttons > a:not(:last-child){
+.nav__buttons > a:not(:last-child) {
     margin-right: 2rem;
 }
 
@@ -457,10 +469,13 @@ a:active {
     border-bottom: 1px solid #f5f5f5;
 }
 
-.dropdown__content .list__item a {
-    display: block;
+.dropdown__content .list__item {
     font-size: 15px;
     color: grey;
+}
+
+.dropdown__content .list__item a {
+    display: block;
     padding: 1.75rem 2rem;
 }
 

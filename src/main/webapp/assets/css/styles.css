@@ -97,7 +97,7 @@ a:active {
     padding: 0.5rem 2rem;
     font-weight: bold;
     white-space: nowrap;
-    letter-spacing: .3px;
+    letter-spacing: .3rem;
     font-size: 1.6rem;
 }
 
@@ -462,7 +462,7 @@ a:active {
     width: 185px;
     font-size: 14px;
     color: #757575;
-    letter-spacing: 0.1px;
+    letter-spacing: .1rem;
 }
 
 .dropdown__content .list:not(:last-child) {

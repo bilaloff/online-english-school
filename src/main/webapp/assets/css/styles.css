@@ -10,6 +10,7 @@
     --color-success: #53D49A;
     --border-radius: .5rem;
     --border-radius-round: 5rem;
+    --header-height: 8rem;
 }
 
 /* || Elements */
@@ -39,16 +40,6 @@ h1,
 h2,
 h3 {
     color: var(--color-heading);
-}
-
-/* || Classes */
-
-.container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 15px;
-    padding-left: 15px;
 }
 
 h1,
@@ -156,8 +147,8 @@ a:active {
     padding-left: 0;
 }
 
-.list__item {
-    /*display: inline-block;*/
+.list .list__item {
+    font-size: 1.5rem;
 }
 
 .list__item a {
@@ -167,12 +158,20 @@ a:active {
 }
 
 .list--inline {
-    display: inline-flex;
-    align-items: center;
+
+}
+
+.list--inline .list__item {
+    display: inline-block;
 }
 
 .list--inline .list__item:not(:last-child) {
     margin-right: 2.5rem;
+}
+
+.list--small .list__item {
+    font-size: 1.3rem;
+    margin-right: .785rem;
 }
 
 /* || Buttons */
@@ -350,21 +349,18 @@ a:active {
 /* Navigation Bar */
 
 .header {
+    height: var(--header-height);
     background: #1e1a33;
 }
 
 .nav {
     display: flex;
-    justify-content: space-between;
+    height: var(--header-height);
 }
 
 .nav .list--inline {
     color: #fff;
-    font-size: 14px;
-}
-
-.nav .list--inline a {
-    padding: 2rem;
+    font-size: 1.4rem;
 }
 
 .nav .list--inline .list__item:not(:last-child) {
@@ -373,7 +369,12 @@ a:active {
 
 .nav .list--inline .list__item {
     position: relative;
+    line-height: var(--header-height);
     transition: background-color 150ms ease-in-out;
+}
+
+.nav .list--inline .list__item > a {
+    padding: 0 2rem;
 }
 
 .nav .list--inline .list__item:hover {
@@ -392,7 +393,7 @@ a:active {
 }
 
 .nav .list--inline .list__item:hover::before {
-    height: 4px;
+    height: .4rem;
 }
 
 .nav__buttons {
@@ -412,39 +413,41 @@ a:active {
     position: relative;
 }
 
-.dropdown__button {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    cursor: pointer;
-    height: 100%;
-    transition: background 125ms ease-out;
-}
-
-.dropdown__button:hover {
+.dropdown:focus,
+.dropdown:hover {
     background: var(--color-body);
 }
 
+.dropdown__button {
+    line-height: var(--header-height);
+    padding: 0 1rem;
+    cursor: pointer;
+    transition: background 125ms ease-out;
+    user-select: none;
+}
+
 .dropdown__image {
-    width: 36px;
-    height: 36px;
-    border-radius: 50px;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 5rem;
     object-fit: cover;
+    vertical-align: middle;
 }
 
 .dropdown__username {
     color: #fff;
     margin-right: 1rem;
-    font-size: 14px;
+    font-size: 1.4rem;
 }
 
 .dropdown__content {
-    width: 275px;
+    width: 27rem;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
     transition: opacity 250ms ease-in-out, max-height 250ms ease-in-out;
     position: absolute;
+    top: calc(var(--header-height) + .5rem);
     right: 0;
     background: white;
     box-shadow: 0 0 1px rgba(57, 70, 78, 0.15),
@@ -473,9 +476,9 @@ a:active {
 
 .dropdown__content .media__image > img {
     object-fit: cover;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 5rem;
 }
 
 .dropdown__content .media {
@@ -483,7 +486,7 @@ a:active {
 }
 
 .dropdown__content .media__title {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #444;
     font-weight: 600;
 }
@@ -493,8 +496,8 @@ a:active {
     display: block;
     white-space: nowrap;
     overflow: hidden;
-    width: 185px;
-    font-size: 14px;
+    width: 18.5rem;
+    font-size: 1.4rem;
     color: #757575;
     letter-spacing: .1rem;
 }
@@ -504,13 +507,13 @@ a:active {
 }
 
 .dropdown__content .list__item {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: grey;
 }
 
 .dropdown__content .list__item a {
     display: block;
-    padding: 1.75rem 2rem;
+    padding: 1.5rem 2rem;
 }
 
 .dropdown__content .list__item:hover {
@@ -525,4 +528,27 @@ a:active {
 .dropdown__content .list__item--nav-image > a > img {
     height: 2.5rem;
     margin-right: 1rem;
+}
+
+.banner-subheader--highlight {
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.banner-video {
+    opacity: 0.3;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+    .banner-video {
+        left: 50%;
+    }
 }

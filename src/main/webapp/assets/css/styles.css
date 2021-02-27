@@ -90,6 +90,40 @@ a:active {
     color: var(--color-secondary);
 }
 
+/* || Utility Classes */
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.hidden-sm {
+    display: none;
+}
+
+.push {
+    margin-left: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .hidden-sm {
+        display: block;
+    }
+}
+
+/* || Typography */
+
+.text--small {
+    font-size: 1.3rem;
+}
+
+.text--center {
+    text-align: center;
+}
+
 /* || Badges */
 
 .badge {

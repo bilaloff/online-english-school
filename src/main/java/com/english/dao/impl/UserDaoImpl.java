@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
 
     private static final String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private static final String FIND_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
+    private static final String ADD_USER = "INSERT INTO users (email, password, firstname, lastname) VALUES(?,?,?,?)";
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
 
@@ -40,6 +41,7 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
+            throw new DAOException(e.getMessage());
         }
         return Optional.empty();
     }
@@ -50,8 +52,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void add(User entity) {
-
+    public void add(User entity) throws DAOException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(ADD_USER);
+            statement.setString(1, entity.getEmail());
+            statement.setString(2, entity.getPassword());
+            statement.setString(3, entity.getFirstname());
+            statement.setString(4, entity.getLastname());
+            statement.execute();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new DAOException(e.getMessage());
+        }
     }
 
     @Override

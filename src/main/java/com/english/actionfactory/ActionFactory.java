@@ -1,6 +1,7 @@
 package com.english.actionfactory;
 
 import com.english.actionfactory.action.api.FindUserByEmail;
+import com.english.actionfactory.action.api.SignUpUser;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class ActionFactory {
     static {
         /* APIs */
         actionMap.put("POST/api/user/email", new FindUserByEmail());
+        actionMap.put("POST/api/user/add", new SignUpUser());
     }
 
     private ActionFactory(){}

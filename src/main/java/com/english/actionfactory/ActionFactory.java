@@ -1,6 +1,6 @@
 package com.english.actionfactory;
 
-import com.english.actionfactory.action.*;
+import com.english.actionfactory.action.api.FindUserByEmail;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -13,6 +13,8 @@ public class ActionFactory {
     private static final ActionFactory INSTANCE = new ActionFactory();
 
     static {
+        /* APIs */
+        actionMap.put("POST/api/user/email", new FindUserByEmail());
     }
 
     private ActionFactory(){}
@@ -23,7 +25,8 @@ public class ActionFactory {
 
     public Action getAction(HttpServletRequest request) {
         String method = request.getMethod();
+        String servletPath = request.getServletPath();
         String path = Objects.requireNonNullElse(request.getPathInfo(), "/");
-        return actionMap.get(method.concat(path));
+        return actionMap.get(method.concat(servletPath).concat(path));
     }
 }

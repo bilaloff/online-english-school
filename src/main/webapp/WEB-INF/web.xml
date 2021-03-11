@@ -17,14 +17,8 @@
         <servlet-name>FrontController</servlet-name>
         <url-pattern>/pages/*</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>APIController</servlet-name>
-        <servlet-class>com.english.controller.APIController</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>APIController</servlet-name>
+        <servlet-name>FrontController</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 

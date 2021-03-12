@@ -55,16 +55,16 @@ public class DatabaseDataSource {
         Connection connection = null;
         try {
             connection = connectionQueue.take();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            if (!connection.getAutoCommit()) {
+                connection.setAutoCommit(true);
+            }
+        } catch (InterruptedException | SQLException e) {
+            LOGGER.error(e.getMessage(), e);
         }
         return connection;
     }
 
     public void releaseConnection(PooledConnectionWrapper connection) throws SQLException {
-        if (!connection.getAutoCommit()) {
-            connection.setAutoCommit(true);
-        }
         connectionQueue.offer(connection);
     }
 

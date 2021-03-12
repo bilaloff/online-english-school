@@ -64,7 +64,7 @@ public class DatabaseDataSource {
         return connection;
     }
 
-    public void releaseConnection(PooledConnectionWrapper connection) throws SQLException {
+    public void releaseConnection(PooledConnectionWrapper connection) {
         connectionQueue.offer(connection);
     }
 

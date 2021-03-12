@@ -56,7 +56,7 @@ public class PooledConnectionWrapper implements Connection {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
         databaseDataSource.releaseConnection(this);
     }
 

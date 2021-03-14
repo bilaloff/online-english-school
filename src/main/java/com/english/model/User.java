@@ -2,7 +2,7 @@ package com.english.model;
 
 import java.time.LocalDateTime;
 
-public class User extends Model {
+public abstract class User extends Model {
 
     private Role role;
     private String firstname;

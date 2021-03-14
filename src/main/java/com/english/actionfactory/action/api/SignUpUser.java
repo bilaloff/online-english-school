@@ -5,7 +5,6 @@ import com.english.actionfactory.ActionResult;
 import com.english.model.User;
 import com.english.service.ServiceException;
 import com.english.service.UserService;
-import com.english.service.impl.UserServiceImpl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -25,9 +24,9 @@ public class SignUpUser implements Action {
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Gson gson = new Gson();
         User user = gson.fromJson(request.getAttribute(BODY).toString(), User.class);
-        UserService userService = new UserServiceImpl();
+        UserService userService = new UserService();
         try {
-            userService.signUpUser(user);
+            userService.signUp(user);
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write(new JsonObject().toString());
         } catch (ServiceException e) {

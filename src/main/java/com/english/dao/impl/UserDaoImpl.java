@@ -3,13 +3,11 @@ package com.english.dao.impl;
 import com.english.dao.DAOException;
 import com.english.dao.UserDao;
 import com.english.database.DatabaseDataSource;
+import com.english.model.Student;
 import com.english.model.User;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +18,7 @@ public class UserDaoImpl implements UserDao {
     private static final String ADD_USER = "INSERT INTO users (email, password, firstname, lastname) VALUES(?,?,?,?)";
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
+    private static final long USER_ROLE = 2;
 
     public UserDaoImpl() {
     }
@@ -31,7 +30,7 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
+                User user = new Student();
                 user.setId(resultSet.getShort("id"));
                 user.setEmail(resultSet.getString("email"));
                 user.setFirstname(resultSet.getString("firstname"));
@@ -53,15 +52,31 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void add(User entity) throws DAOException {
-        try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(ADD_USER);
+        Connection connection = dataSource.getConnection();
+        try (connection) {
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(ADD_USER, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, entity.getEmail());
             statement.setString(2, entity.getPassword());
             statement.setString(3, entity.getFirstname());
             statement.setString(4, entity.getLastname());
             statement.execute();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            statement = connection.prepareStatement(ADD_USER_ROLE);
+            generatedKeys.next();
+            statement.setLong(1, generatedKeys.getLong(1));
+            statement.setLong(2, USER_ROLE);
+            statement.execute();
+            connection.commit();
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
+            try {
+                LOGGER.error(e.getMessage(), e);
+                connection.rollback();
+            } catch (SQLException exception) {
+                exception.initCause(e);
+                LOGGER.error(e.getMessage(), exception);
+                throw new DAOException(exception.getMessage());
+            }
             throw new DAOException(e.getMessage());
         }
     }
@@ -73,7 +88,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(User entity) {
-
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(DELETE_USER);
+            statement.setLong(1, entity.getId());
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 
     @Override
@@ -83,7 +103,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
+                User user = new Student();
                 user.setId(resultSet.getShort("id"));
                 user.setEmail(resultSet.getString("email"));
                 user.setFirstname(resultSet.getString("firstname"));

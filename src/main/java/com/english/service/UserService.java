@@ -14,33 +14,43 @@ public class UserService {
     public UserService() {
     }
 
-    public void signUp(User user) throws ServiceException {
-        if (userDao.findByEmail(user.getEmail()).isEmpty()) {
-            try {
+    public void signUpUser(User user) throws ServiceException {
+        try {
+            if (userDao.findByEmail(user.getEmail()).isEmpty()) {
                 userDao.add(user);
-            } catch (DAOException e) {
-                throw new ServiceException("error.somethingWentWrong");
+            } else {
+                throw new ServiceException("auth.email.inUse");
             }
-        } else {
-            throw new ServiceException("auth.email.inUse");
+        } catch (DAOException e) {
+            throw new ServiceException("error.somethingWentWrong");
         }
     }
 
-    public User signIn(User user) throws ServiceException {
-        if (userDao.findByEmail(user.getEmail()).isEmpty()) {
-            try {
-                userDao.add(user);
-            } catch (DAOException e) {
-                throw new ServiceException("error.somethingWentWrong");
+    public User signInUser(User user) throws ServiceException {
+        try {
+            Optional<User> userOptional = userDao.findByEmail(user.getEmail());
+            if (userOptional.isPresent()) {
+                User foundUser = userOptional.get();
+                if (user.getPassword().equals(foundUser.getPassword())) {
+                    return foundUser;
+                } else {
+                    throw new ServiceException("auth.credentials.incorrectPassword");
+                }
+            } else {
+                throw new ServiceException("auth.email.notFound");
             }
-        } else {
-            throw new ServiceException("auth.email.inUse");
+        } catch (DAOException e) {
+            throw new ServiceException("error.somethingWentWrong");
         }
-        return null;
     }
 
     public Optional<User> getUserByEmail(String email) throws ServiceException {
-        return userDao.findByEmail(email);
+        try {
+            return userDao.findByEmail(email);
+        } catch (DAOException e) {
+            e.printStackTrace();
+            throw new ServiceException("error.somethingWentWrong");
+        }
     }
 
     public void changePassword(User user) throws ServiceException {

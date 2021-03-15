@@ -22,15 +22,15 @@ public class SignUpUser implements Action {
 
     @Override
     public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ResourceBundle errorsBundle = ResourceBundle.getBundle("errors", response.getLocale());
         Gson gson = new Gson();
         User user = gson.fromJson(request.getAttribute(BODY).toString(), User.class);
         UserService userService = new UserService();
         try {
-            userService.signUp(user);
+            userService.signUpUser(user);
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.getWriter().write(new JsonObject().toString());
         } catch (ServiceException e) {
-            ResourceBundle errorsBundle = ResourceBundle.getBundle("errors", response.getLocale());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             JsonObject errorResponse = new JsonObject();
             errorResponse.addProperty(ERROR, errorsBundle.getString(e.getMessage()));

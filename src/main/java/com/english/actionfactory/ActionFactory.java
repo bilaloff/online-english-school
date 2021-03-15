@@ -2,6 +2,7 @@ package com.english.actionfactory;
 
 import com.english.actionfactory.action.api.FindUserByEmail;
 import com.english.actionfactory.action.api.SignUpUser;
+import com.english.actionfactory.action.api.UpdatePassword;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class ActionFactory {
         /* APIs */
         actionMap.put("POST/api/user/email", new FindUserByEmail());
         actionMap.put("POST/api/user/add", new SignUpUser());
+        actionMap.put("POST/api/update-password", new UpdatePassword());
     }
 
     private ActionFactory(){}

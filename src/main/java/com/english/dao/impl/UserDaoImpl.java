@@ -14,6 +14,8 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
     private static final String FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    private static final String CHECK_PASSWORD = "SELECT * FROM users WHERE id = ? AND password = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE users SET password = ? WHERE id = ?";
     private static final String FIND_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String ADD_USER = "INSERT INTO users (email, password, firstname, lastname) VALUES(?,?,?,?)";
     private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
@@ -117,4 +119,30 @@ public class UserDaoImpl implements UserDao {
         return Optional.empty();
     }
 
+    @Override
+    public void changePassword(User user) throws DAOException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(CHANGE_PASSWORD);
+            statement.setString(1, user.getNewPassword());
+            statement.setLong(2, user.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new DAOException(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean checkPassword(User user) throws DAOException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(CHECK_PASSWORD);
+            statement.setLong(1, user.getId());
+            statement.setString(2, user.getPassword());
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new DAOException(e.getMessage());
+        }
+    }
 }

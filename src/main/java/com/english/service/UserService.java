@@ -43,4 +43,23 @@ public class UserService {
         return userDao.findByEmail(email);
     }
 
+    public void changePassword(User user) throws ServiceException {
+        try {
+            if(!user.getNewPassword().equals(user.getNewPasswordRepeat())){
+                throw new ServiceException("auth.credentials.passwordsDoNotMatch");
+            }
+            if(user.getNewPassword().length() < 6){
+                throw new ServiceException("auth.password.minLength");
+            }
+            if(user.getNewPassword().length() > 32){
+                throw new ServiceException("auth.password.maxLength");
+            }
+            if(!userDao.checkPassword(user)){
+                throw new ServiceException("auth.credentials.incorrectPassword");
+            }
+            userDao.changePassword(user);
+        } catch (DAOException e){
+            throw new ServiceException("error.somethingWentWrong");
+        }
+    }
 }

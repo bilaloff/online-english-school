@@ -2,13 +2,15 @@ package com.english.model;
 
 import java.time.LocalDateTime;
 
-public abstract class User extends Model {
+public class User extends Model {
 
     private Role role;
     private String firstname;
     private String lastname;
     private String email;
     private String password;
+    private String newPassword;
+    private String newPasswordRepeat;
     private String image;
     private String skype;
     private LocalDateTime dateRegistered;
@@ -56,6 +58,22 @@ public abstract class User extends Model {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getNewPasswordRepeat() {
+        return newPasswordRepeat;
+    }
+
+    public void setNewPasswordRepeat(String newPasswordRepeat) {
+        this.newPasswordRepeat = newPasswordRepeat;
     }
 
     public String getImage() {

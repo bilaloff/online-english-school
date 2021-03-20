@@ -5,11 +5,13 @@ import java.time.LocalDateTime;
 public class Article extends Model {
 
     private long id;
+    private String category;
     private long viewCount;
     private User author;
     private String title;
     private String content;
-    private LocalDateTime datePublished;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String image;
 
     public Article() {
@@ -23,6 +25,14 @@ public class Article extends Model {
     @Override
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public long getViewCount() {
@@ -57,12 +67,20 @@ public class Article extends Model {
         this.content = content;
     }
 
-    public LocalDateTime getDatePublished() {
-        return datePublished;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDatePublished(LocalDateTime datePublished) {
-        this.datePublished = datePublished;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getImage() {

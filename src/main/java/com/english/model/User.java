@@ -13,7 +13,7 @@ public class User extends Model {
     private String newPasswordRepeat;
     private String image;
     private String skype;
-    private LocalDateTime dateRegistered;
+    private LocalDateTime createdAt;
     private boolean verified;
     private boolean logged;
 
@@ -84,12 +84,12 @@ public class User extends Model {
         this.image = image;
     }
 
-    public LocalDateTime getDateRegistered() {
-        return dateRegistered;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDateRegistered(LocalDateTime dateRegistered) {
-        this.dateRegistered = dateRegistered;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getSkype() {

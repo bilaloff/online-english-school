@@ -40,7 +40,7 @@ CREATE TABLE posts
     views       INT       DEFAULT 0,
     active      BIT       DEFAULT FALSE,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_ad  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE post_categories

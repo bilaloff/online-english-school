@@ -120,4 +120,15 @@ public class User extends Model {
     public String toString() {
         return String.format("%s [id: %d, email: %s, firstname: %s, isLogged:%b]", getClass().getSimpleName(), getId(), getEmail(), getFirstname(), isLogged());
     }
+
+    public User getPublicProfile() {
+        User user = new User();
+        user.setId(this.getId());
+        user.setFirstname(this.getFirstname());
+        user.setLastname(this.getLastname());
+        user.setEmail(this.getEmail());
+        user.setRole(this.getRole());
+        user.setImage(this.getImage());
+        return user;
+    }
 }

@@ -1,0 +1,30 @@
+<taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="2.0"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+
+    <tlib-version>2.1</tlib-version>
+    <uri>http://english/media</uri>
+    <short-name>Media TLD</short-name>
+
+    <tag>
+        <name>pagination</name>
+        <tag-class>com.english.tags.Pagination</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>page</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>hasNext</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>url</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

@@ -1,11 +1,14 @@
-package com.english.model;
+package com.english.model.blog;
+
+import com.english.model.Model;
+import com.english.model.User;
 
 import java.time.LocalDateTime;
 
-public class Article extends Model {
+public class Post extends Model {
 
     private long id;
-    private String category;
+    private Category category;
     private long viewCount;
     private User author;
     private String title;
@@ -14,7 +17,7 @@ public class Article extends Model {
     private LocalDateTime updatedAt;
     private String image;
 
-    public Article() {
+    public Post() {
     }
 
     @Override
@@ -27,11 +30,11 @@ public class Article extends Model {
         this.id = id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

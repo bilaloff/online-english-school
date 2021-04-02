@@ -79,6 +79,21 @@ public class BlogDaoImpl implements BlogDao {
         return null;
     }
 
+    @Override
+    public List<Post> getPopularPosts() {
+        List<Post> posts = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM posts_view ORDER BY views DESC LIMIT 6");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                posts.add(populateArticle(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return posts;
+    }
+
     private static Post populateArticle(ResultSet resultSet) throws SQLException {
         Post post = new Post();
         Category category = new Category();
@@ -103,5 +118,16 @@ public class BlogDaoImpl implements BlogDao {
         post.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
 
         return post;
+    }
+
+    @Override
+    public void incrementViewCount(long postId) {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE posts SET views = (views + 1) WHERE id = ?");
+            statement.setLong(1, postId);
+            statement.execute();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 }

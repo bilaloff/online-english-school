@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface BlogDao extends BaseDao<Post> {
     List<Post> getByCategoryName(String categoryName);
+
+    List<Post> getPopularPosts();
+
+    void incrementViewCount(long postId);
 }

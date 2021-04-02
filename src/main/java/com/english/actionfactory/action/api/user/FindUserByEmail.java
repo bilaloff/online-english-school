@@ -1,4 +1,4 @@
-package com.english.actionfactory.action.api;
+package com.english.actionfactory.action.api.user;
 
 import com.english.actionfactory.Action;
 import com.english.actionfactory.ActionResult;

@@ -4,21 +4,18 @@ import com.english.dao.CommentDao;
 import com.english.dao.DAOException;
 import com.english.database.DatabaseDataSource;
 import com.english.model.User;
-import com.english.model.blog.Category;
 import com.english.model.blog.Comment;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class CommentDaoImpl implements CommentDao {
 
-    private static final String POST_COMMENTS = "SELECT * FROM comments_view WHERE post_id = ?";
+    private static final String SELECT_COMMENTS = "SELECT * FROM comments_view WHERE post_id = ?";
+    private static final String ADD_COMMENT = "INSERT INTO post_comments (post_id, user_id, comment) VALUES (?,?,?)";
     private static final Logger LOGGER = Logger.getLogger(CommentDaoImpl.class);
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
 
@@ -33,8 +30,17 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public void add(Category entity) throws DAOException {
-
+    public void add(Comment entity) throws DAOException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(ADD_COMMENT);
+            statement.setLong(1, entity.getPostId());
+            statement.setLong(2, entity.getUser().getId());
+            statement.setString(3, entity.getComment());
+            statement.execute();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            throw new DAOException(e.getMessage(), e);
+        }
     }
 
     @Override

@@ -20,13 +20,13 @@ public class CommentDaoImpl implements CommentDao {
     private final DatabaseDataSource dataSource = DatabaseDataSource.getInstance();
 
     @Override
-    public Optional<Category> findById(Long id) {
+    public Optional<Comment> findById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public List<Category> findAll() {
-        return null;
+    public List<Comment> findAll() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -44,23 +44,23 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public void update(Category entity) {
+    public void update(Comment entity) {
 
     }
 
     @Override
-    public void delete(Category entity) {
+    public void delete(Comment entity) {
 
     }
 
     @Override
     public List<Comment> findByPostId(long postId) {
         List<Comment> comments = new ArrayList<>();
-        try(Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(POST_COMMENTS);
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_COMMENTS);
             statement.setLong(1, postId);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Comment comment = new Comment();
                 User user = new User();
 
@@ -72,11 +72,11 @@ public class CommentDaoImpl implements CommentDao {
 
                 comment.setId(resultSet.getLong("comment_id"));
                 comment.setComment(resultSet.getString("comment"));
-                comment.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
+                comment.setCreatedAt(resultSet.getTimestamp("created_at").getTime());
 
                 comments.add(comment);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
         return comments;

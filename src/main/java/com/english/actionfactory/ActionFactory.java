@@ -18,7 +18,7 @@ public class ActionFactory {
         /* APIs */
         actionMap.put("POST/api/user/email", new FindUserByEmail());
         actionMap.put("POST/api/user/add", new SignUpUser());
-        actionMap.put("POST/api/update-password", new UpdatePassword());
+        actionMap.put("POST/api/user/settings/password", new UpdatePassword());
     }
 
     private ActionFactory(){}

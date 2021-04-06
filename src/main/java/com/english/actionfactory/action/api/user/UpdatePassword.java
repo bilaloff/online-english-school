@@ -31,7 +31,6 @@ public class UpdatePassword implements Action {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             JsonObject errorResponse = new JsonObject();
             errorResponse.addProperty(ERROR, errorsBundle.getString(e.getMessage()));
-            System.out.println(errorResponse.toString());
             response.getWriter().write(errorResponse.toString());
         }
         return ActionResult.SKIP;
